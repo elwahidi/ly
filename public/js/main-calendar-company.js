@@ -69,7 +69,11 @@
                                 headers: {
                                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                                 },
+                                beforeSend:function(){
+                                    $('#sidebar-overlay').show();
+                                },
                                 success:function(data){
+                                    $('#sidebar-overlay').hide();
                                     eventData.id = data.id;
                                     $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
                                     $('#event-modal').modal('hide');
@@ -107,10 +111,10 @@
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         beforeSend:function(){
-                            // attedre
+                            $('#sidebar-overlay').show();
                         },
                         success:function(){
-                            // success
+                            $('#sidebar-overlay').hide();
                         },
                     });
                 },
@@ -126,6 +130,12 @@
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
+                        beforeSend:function(){
+                            $('#sidebar-overlay').show();
+                        },
+                        success:function(){
+                            $('#sidebar-overlay').hide();
+                        },
                     });
                 },
                 eventClick:function(events){
@@ -139,7 +149,11 @@
                                 _method: 'delete',
                                 _token : $('meta[name="csrf-token"]').attr('content')
                             },
+                            beforeSend:function(){
+                                $('#sidebar-overlay').show();
+                            },
                             success:function(data){
+                                $('#sidebar-overlay').hide();
                                 $('#calendar').fullCalendar('removeEvents',id);
                             }
                         });
@@ -149,7 +163,7 @@
             });
 
         },error:function(e){
-            console.log("error")
+            window.location.href = "/404"
         }
     });
 
